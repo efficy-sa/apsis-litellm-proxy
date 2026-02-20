@@ -20,6 +20,7 @@ locals {
     SolutionID  = "SO9022"
     SolutionNameKey = "Guidance for Running Generative AI Gateway Proxy on AWS"
     SolutionVersionKey = "1.0.0"
+    BU          = "Central"
   }
 }
 

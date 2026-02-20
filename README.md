@@ -16,13 +16,13 @@ Currently, this repository is configured to deploy to the `sms-sandbox` AWS acco
 To deploy or update the Docker image and AWS infrastructure, run:
 
 ```bash
-.deploy.sh
+./deploy.sh
 ```
 
 To update LiteLLM configuration, edit `config/config.yaml` and run:
 
 ```bash
-.update-litellm-config.sh
+./update-litellm-config.sh
 ```
 
 ---------

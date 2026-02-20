@@ -225,6 +225,7 @@ resource "aws_ecs_service" "litellm_service" {
   task_definition = aws_ecs_task_definition.litellm.arn
   desired_count   = var.desired_capacity
   launch_type     = "FARGATE"
+  propagate_tags  = "SERVICE"
   health_check_grace_period_seconds = 300
 
   network_configuration {

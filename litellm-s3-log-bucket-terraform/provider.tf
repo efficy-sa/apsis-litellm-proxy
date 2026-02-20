@@ -3,6 +3,7 @@ provider "aws" {
     tags = {
       "stack-id" = var.name
       "project"  = "llmgateway"
+      "BU"       = "Central"
     }
   }
 }
