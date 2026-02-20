@@ -1,5 +1,3 @@
-.env
-config/config.yaml
 config/local-config.yaml
 
 .*.sw?
@@ -34,7 +32,6 @@ terraform.tfstate.*
 
 **.env.testing
 **error.txt
-**.env
 sessionmanager-bundle.zip
 sessionmanager-bundle
 backend.hcl

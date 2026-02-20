@@ -1,3 +1,34 @@
+# Apsis LiteLLM proxy
+A LiteLLM proxy that routes Claude Code requests through AWS Bedrock, allowing you to use Bedrock-hosted models as the AI backend.
+Forked from: https://aws.amazon.com/solutions/guidance/multi-provider-generative-ai-gateway-on-aws
+
+## Deployment
+
+Deployments are run from your local machine.
+
+Before running any deploy/update scripts, make sure your AWS CLI credentials are configured for the target account (`sms-sandbox`), for example via `aws configure` or AWS SSO, and verify access:
+
+```bash
+aws sts get-caller-identity
+```
+
+Currently, this repository is configured to deploy to the `sms-sandbox` AWS account.  
+To deploy or update the Docker image and AWS infrastructure, run:
+
+```bash
+.deploy.sh
+```
+
+To update LiteLLM configuration, edit `config/config.yaml` and run:
+
+```bash
+.update-litellm-config.sh
+```
+
+---------
+below is the original readme file
+
+
 # Guidance for Multi-Provider Generative AI Gateway on AWS
 
 ## Table of contents
