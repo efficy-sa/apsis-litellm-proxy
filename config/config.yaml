@@ -34,6 +34,8 @@ environment_variables:
   STORE_MODEL_IN_DB: "True"
   LITELLM_LOG: "DEBUG"
 litellm_settings:
+  request_timeout: 600 # total request timeout
+  stream_timeout: 60 # max wait for first token
   cache: True
   debug: True
   detailed_debug: True
@@ -42,15 +44,15 @@ litellm_settings:
     host: os.environ/REDIS_HOST # Redis server hostname or IP address
     port: os.environ/REDIS_PORT # Redis server port (as a string)
     password: os.environ/REDIS_PASSWORD # Redis server password
-  max_budget: 10.0 # (float) sets max budget in dollars across the entire proxy across all API keys. Note, the budget does not apply to the master key. That is the only exception.
+  max_budget: 5000.0 # (float) sets max budget in dollars across the entire proxy across all API keys. Note, the budget does not apply to the master key. That is the only exception.
   budget_duration: 1mo # (str) frequency of budget reset - You can set duration as seconds ("30s"), minutes ("30m"), hours ("30h"), days ("30d"), months ("1mo").
-  max_internal_user_budget: 10.0 # (float) sets default budget in dollars for each internal user. (Doesn't apply to Admins. Doesn't apply to Teams. Doesn't apply to master key)
+  max_internal_user_budget: 500.0 # (float) sets default budget in dollars for each internal user. (Doesn't apply to Admins. Doesn't apply to Teams. Doesn't apply to master key)
   internal_user_budget_duration: "1mo" # (str) frequency of budget reset - You can set duration as seconds ("30s"), minutes ("30m"), hours ("30h"), days ("30d"), months ("1mo").
   success_callback: ["s3"]
   failure_callback: ["s3"]
   service_callback: ["s3"]
   s3_callback_params:
-    s3_bucket_name: "litellm-logs-20260217125038943300000001"
+    s3_bucket_name: "litellm-logs-20260326163145222300000001"
     s3_region_name: eu-west-1
     #type: redis-semantic
     #similarity_threshold: 0.8   # similarity threshold for semantic cache
@@ -66,15 +68,24 @@ model_list:
       model: bedrock/eu.anthropic.claude-sonnet-4-6
       input_cost_per_token: 0.000003
       output_cost_per_token: 0.000015
+      stream: true
+      timeout: 600
+      stream_timeout: 60
   - model_name: "claude-opus-*"
     litellm_params:
       model: bedrock/eu.anthropic.claude-opus-4-6-v1
       input_cost_per_token: 0.000005
       output_cost_per_token: 0.000025
+      stream: true
+      timeout: 600
+      stream_timeout: 60
   - model_name: "claude-haiku-*"
     litellm_params:
       model: bedrock/eu.anthropic.claude-haiku-4-5-20251001-v1:0
       input_cost_per_token: 0.000001
       output_cost_per_token: 0.000005
+      stream: true
+      timeout: 600
+      stream_timeout: 60
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY

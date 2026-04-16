@@ -210,6 +210,12 @@ variable "certificate_arn" {
   default     = ""
 }
 
+variable "cloudfront_certificate_arn" {
+  description = "ARN of the ACM certificate for CloudFront (must be in us-east-1). Required if use_route53 is true."
+  type        = string
+  default     = ""
+}
+
 variable "record_name" {
   description = "Record name for the ingress. Required if use_route53 is true."
   type        = string

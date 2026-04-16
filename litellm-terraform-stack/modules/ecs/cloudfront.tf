@@ -79,17 +79,17 @@ resource "aws_cloudfront_distribution" "this" {
   
   # Use the provided certificate if Route53 is enabled with a custom domain
   dynamic "viewer_certificate" {
-    for_each = var.use_route53 && var.certificate_arn != "" ? [1] : []
+    for_each = var.use_route53 && var.cloudfront_certificate_arn != "" ? [1] : []
     content {
-      acm_certificate_arn = var.certificate_arn
+      acm_certificate_arn = var.cloudfront_certificate_arn
       ssl_support_method  = "sni-only"
       minimum_protocol_version = "TLSv1.2_2021"
     }
   }
-  
+
   # Use CloudFront default certificate if no Route53 or certificate is provided
   dynamic "viewer_certificate" {
-    for_each = !var.use_route53 || var.certificate_arn == "" ? [1] : []
+    for_each = !var.use_route53 || var.cloudfront_certificate_arn == "" ? [1] : []
     content {
       cloudfront_default_certificate = true
     }

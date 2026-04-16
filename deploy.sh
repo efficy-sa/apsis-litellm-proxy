@@ -248,7 +248,7 @@ encrypt = true
 EOF
 echo "Generated backend.hcl configuration"
 
-terraform init -backend-config=backend.hcl
+terraform init -reconfigure -backend-config=backend.hcl
 terraform apply -auto-approve
 
 if [ $? -eq 0 ]; then
@@ -346,6 +346,7 @@ export TF_VAR_record_name=$RECORD_NAME
 export TF_VAR_hosted_zone_name=$HOSTED_ZONE_NAME
 export TF_VAR_create_private_hosted_zone_in_existing_vpc=$CREATE_PRIVATE_HOSTED_ZONE_IN_EXISTING_VPC
 export TF_VAR_certificate_arn=$CERTIFICATE_ARN
+export TF_VAR_cloudfront_certificate_arn=$CLOUDFRONT_CERTIFICATE_ARN
 export TF_VAR_architecture=$ARCH
 export TF_VAR_disable_outbound_network_access=$DISABLE_OUTBOUND_NETWORK_ACCESS
 export TF_VAR_desired_capacity=$DESIRED_CAPACITY
@@ -397,7 +398,7 @@ encrypt = true
 EOF
 echo "Generated backend.hcl configuration"
 
-terraform init -backend-config=backend.hcl
+terraform init -reconfigure -backend-config=backend.hcl
 if [ -z "$EXISTING_VPC_ID" ] && [ "$DEPLOYMENT_PLATFORM" = "EKS" ]; then
     echo "Deploying base of terraform first for case of new vpc and eks"
     terraform apply -target=module.base -auto-approve
