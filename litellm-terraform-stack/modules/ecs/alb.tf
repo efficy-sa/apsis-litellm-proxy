@@ -170,7 +170,7 @@ resource "aws_lb_listener_rule" "cloudfront_auth" {
 # Reject requests without CloudFront header when CloudFront is enabled
 # This is the last line of defense for non-health-check paths
 resource "aws_lb_listener_rule" "reject_direct_access" {
-  count        = var.use_cloudfront ? 1 : 0
+  count        = 0 # Direct HTTPS access to ALB is allowed; CloudFront origin uses HTTP listener
   listener_arn = aws_lb_listener.https.arn
   priority     = 6  # Third priority
 
