@@ -47,6 +47,17 @@ resource "aws_wafv2_web_acl" "litellm_waf" {
             count {}
           }
         }
+
+        # Claude Code CLI's system prompt / tool descriptions reference the EC2
+        # metadata IP (169.254.169.254) in security guidance, which trips the
+        # managed SSRF body rule. Override to Count so the rule logs but does
+        # not block legitimate SDK traffic.
+        rule_action_override {
+          name = "EC2MetaDataSSRF_BODY"
+          action_to_use {
+            count {}
+          }
+        }
       }
     }
 
